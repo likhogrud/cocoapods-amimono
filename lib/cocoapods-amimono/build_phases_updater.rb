@@ -17,7 +17,7 @@ module Amimono
               fi
             done
             filelist=${filelist\%$'\\n'}
-            echo "$filelist" > "${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}-${TARGET_NAME}-${ARCH}.objects.filelist"
+            echo -n "$filelist" > "${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}-${TARGET_NAME}-${ARCH}.objects.filelist"
           done
         SCRIPT
 
