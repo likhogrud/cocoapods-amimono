@@ -24,8 +24,6 @@ module Amimono
     AMIMONO_FILELIST_BUILD_PHASE = '[Amimono] Create filelist per architecture'
 
     def update_build_phases(installer_context, aggregated_targets)
-      # All user projects should be the same I hope
-      user_project = aggregated_targets.first.user_project
       aggregated_targets.each do |aggregated_target|
         # This pick is probably wrong, but works for most of the simple cases
         user_target = aggregated_target.user_targets.first
@@ -35,7 +33,7 @@ module Amimono
         create_or_update_amimono_phase(user_target, AMIMONO_FILELIST_BUILD_PHASE, generate_filelist_script(installer_context, aggregated_target))
         puts "[Amimono] Build phases updated for target #{aggregated_target.cocoapods_target_label}"
       end
-      user_project.save
+      aggregated_targets.map { |target| target.user_project }.uniq!.each { |project| project.save } 
     end
 
     private
