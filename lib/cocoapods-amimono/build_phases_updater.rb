@@ -33,7 +33,8 @@ module Amimono
         create_or_update_amimono_phase(user_target, AMIMONO_FILELIST_BUILD_PHASE, generate_filelist_script(installer_context, aggregated_target))
         puts "[Amimono] Build phases updated for target #{aggregated_target.cocoapods_target_label}"
       end
-      aggregated_targets.map { |target| target.user_project }.uniq!.each { |project| project.save } 
+      
+      aggregated_targets.map { |target| target.user_project }.uniq.each { |project| project.save } 
     end
 
     private
